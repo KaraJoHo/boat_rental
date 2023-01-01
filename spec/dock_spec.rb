@@ -40,4 +40,14 @@ RSpec.describe Dock do
     end
   end
 
+  describe '#charge' do 
+    it 'takes a boat and returns a hash with credit card number/renter kv pair and amount kv pair' do 
+      dock.rent(kayak_1, patrick)    
+      dock.rent(kayak_2, patrick)    
+      dock.rent(sup_1, eugene) 
+
+      expect(dock.charge(kayak_1)).to eq({:card_number => "4242424242424242", :amount => 40})
+    end
+  end
+
 end
