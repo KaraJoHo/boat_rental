@@ -89,4 +89,27 @@ RSpec.describe Dock do
     end
   end
 
+  describe '#revenue and return' do 
+    it 'once all boats are returned, the revenue can be calculated' do 
+      dock.rent(kayak_1, patrick)
+      dock.rent(kayak_2, patrick)
+
+      dock.log_hour
+
+      dock.rent(canoe, patrick)
+
+      dock.log_hour
+
+      expect(dock.revenue).to eq(0)
+
+      dock.return(kayak_1)
+      dock.return(kayak_2)
+      dock.return(canoe)
+
+      expect(dock.revenue).to eq(105)
+
+
+    end
+  end
+
 end
