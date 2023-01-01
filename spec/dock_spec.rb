@@ -9,6 +9,9 @@ RSpec.describe Dock do
   let(:kayak_2) {Boat.new(:kayak, 20)}
   let(:sup_1) {Boat.new(:standup_paddle_board, 15)}
 
+  let(:canoe) {Boat.new(:canoe, 25)}
+  let(:sup_2) {Boat.new(:standup_paddle_board, 15)}
+
   let(:patrick) {Renter.new("Patrick Star", "4242424242424242")}
   let(:eugene) {Renter.new("Eugene Crabs", "1313131313131313")}
 
@@ -60,6 +63,29 @@ RSpec.describe Dock do
       sup_1.add_hour
 
       expect(dock.charge(sup_1)).to eq({:card_number => "1313131313131313", :amount => 45})
+    end
+  end
+
+  describe '#log_hour' do 
+    it 'logs another hour for the boats in the dock' do 
+      dock.rent(kayak_1, patrick)
+      dock.rent(kayak_2, patrick)
+      expect(kayak_1.hours_rented).to eq(0)
+      expect(kayak_2.hours_rented).to eq(0)
+
+      # kayak_1 and kayak_2 are rented an additional hour
+      dock.log_hour
+      expect(kayak_1.hours_rented).to eq(1)
+      expect(kayak_2.hours_rented).to eq(1)
+
+      dock.rent(canoe, patrick)
+
+      # kayak_1, kayak_2, and canoe are rented an additional hour
+      dock.log_hour
+
+      expect(kayak_1.hours_rented).to eq(2)
+      expect(kayak_2.hours_rented).to eq(2)
+      expec(canoe.hours_rented).to eq(1)
     end
   end
 
