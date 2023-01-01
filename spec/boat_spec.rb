@@ -7,7 +7,19 @@ RSpec.describe Boat do
     it 'exists and has a type and price' do 
       expect(kayak).to be_a(Boat)
       expect(kayak.type).to eq(:kayak)
-      expect(kayak.price).to eq(20)
+      expect(kayak.price_per_hour).to eq(20)
+    end
+  end
+  
+  describe '#hours_rented/add_hour' do 
+    it 'starts with 0 and adds hours rented' do 
+      expect(kayak.hours_rented).to eq(0)
+
+      kayak.add_hour 
+      kayak.add_hour
+      kayak.add_hour 
+
+      expect(kayak.hours_rented).to eq(3)
     end
   end
 end
