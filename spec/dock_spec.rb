@@ -20,4 +20,24 @@ RSpec.describe Dock do
     end
   end
 
+  describe '#rent/rental_log' do 
+    it 'can rent boats to renter and log the boats rented by the renter' do 
+      expect(dock.rental_log).to eq({})
+
+      dock.rent(kayak_1, patrick)    
+      dock.rent(kayak_2, patrick)    
+      dock.rent(sup_1, eugene)  
+
+      expected_hash = {
+                        kayak_1 => patrick, 
+                        kayak_2 => patrick, 
+                        sup_1 => eugene
+
+      }
+
+      expect(dock.rental_log).to eq(expected_hash)
+
+    end
+  end
+
 end
