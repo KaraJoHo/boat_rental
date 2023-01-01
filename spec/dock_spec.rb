@@ -85,7 +85,7 @@ RSpec.describe Dock do
 
       expect(kayak_1.hours_rented).to eq(2)
       expect(kayak_2.hours_rented).to eq(2)
-      expec(canoe.hours_rented).to eq(1)
+      expect(canoe.hours_rented).to eq(1)
     end
   end
 

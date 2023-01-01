@@ -25,4 +25,10 @@ class Dock
       boat.price_per_hour * boat.hours_rented
     end
   end
+
+  def log_hour 
+    @rental_log.each do |boat, renter| 
+      boat.add_hour
+    end
+  end
 end
