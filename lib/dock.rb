@@ -5,6 +5,7 @@ class Dock
     @name = name 
     @max_rental_time = max_rental_time
     @rental_log = {}
+    @log_amount_before_return = []
   end
 
   def rent(boat, renter)
@@ -31,4 +32,20 @@ class Dock
       boat.add_hour
     end
   end
+
+  def return(boat) 
+    @log_amount_before_return << charge(boat)[:amount]
+    @rental_log.tap {|h| h.delete(boat)}
+  end
+
+  def revenue 
+    if @rental_log.empty? == false 
+      0
+    else
+      @log_amount_before_return.sum do |amount| 
+        amount
+      end
+    end
+  end
+
 end

@@ -108,6 +108,7 @@ RSpec.describe Dock do
 
       expect(dock.revenue).to eq(105)
 
+      
 
     end
   end
