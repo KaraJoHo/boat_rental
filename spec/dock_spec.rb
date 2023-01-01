@@ -108,7 +108,22 @@ RSpec.describe Dock do
 
       expect(dock.revenue).to eq(105)
 
-      
+      dock.rent(sup_1, eugene)
+      dock.rent(sup_2, eugene)
+
+      dock.log_hour
+      dock.log_hour
+      dock.log_hour
+
+      # Any hours rented past the max rental time don't factor into revenue
+      dock.log_hour
+      dock.log_hour
+
+      dock.return(sup_1)
+      dock.return(sup_2)
+
+      expect(dock.revenue).to eq(195)
+
 
     end
   end
